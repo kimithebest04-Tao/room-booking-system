@@ -743,15 +743,21 @@ Invoke-WebRequest -Uri "https://room-booking-api-0khx.onrender.com/admin/mainten
 
 4. **提前 ≥3 天发邮件**到 `kovacs.adam.eke@gmail.com`，三个链接齐全、能打开（发之前自己点一遍）。
 
-### 发送前必做：把 Streamlit 应用设为公开
+### 访问确认（结论：无需改动，公开可访问）
 
-用未登录的浏览器访问 `https://room-booking-tao.streamlit.app/` 会 303 跳到 `/-/login`，
-说明它现在是「仅特定人可见」。老师点开就是登录页，必须改：
+2026-11-23 用**无痕浏览器会话**打开 `https://room-booking-tao.streamlit.app/`，
+页面完整渲染（左侧 `API: https://room-booking-api-0khx.onrender.com`、
+`后端正常 · v1.0.0`，三个页签正常），且没有出现开发者专属的 `Manage app` 按钮，
+说明访客身份即可直接使用。App 的 `Sharing` 为 **"This app is public and searchable"**，
+与预期一致，**不需要再改任何设置**。
 
-1. 打开 <https://share.streamlit.io>（保持你已登录的状态）
-2. 找到 `room-booking-tao` 这个 app，点右侧 `⋮` → `Settings`
-3. 左侧 `Sharing` → `Who can view this app` 下拉选 **"This app is public and searchable"**
-4. 点 `Save`，然后用浏览器无痕窗口再访问一次链接，确认直接进页面而不是登录页
+注意：用脚本直接 `Invoke-WebRequest` / `curl` 访问这个域名会得到 **303 跳到
+`share.streamlit.io/-/auth/app`**。这是 Streamlit 对非浏览器请求的统一鉴权拦截，
+不是私有应用的标志——同一时间请求官方 gallery 里三个公认公开的应用
+（`30days.streamlit.app`、`30daysofai.streamlit.app`、`adventure.streamlit.app`）
+同样全部 303。判断能否公开访问，必须以真实浏览器的结果为准。
+
+发邮件前只需自己做一次最终确认：开一个无痕窗口点开三个链接，能看到预约表单即可。
 
 邮件模板（英文，正式简短）：
 
