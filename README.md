@@ -179,6 +179,7 @@ Copy `.env.example` to `.env` and adjust. `.env` is git-ignored.
 | `OPEN_HOUR` / `CLOSE_HOUR` | opening hours used as utilization denominator | `8` / `20` |
 | `NEON_API_KEY` | provider API key (maintenance controller only) | secret |
 | `NEON_PROJECT_ID` | current instance identifier | secret-ish |
+| `NEON_ORG_ID` | organisation the project is created in (the provider now requires it; resolved from the API key when left empty) | `org-...` |
 | `RENDER_API_KEY` / `RENDER_SERVICE_ID` | deployment control | secret |
 | `BACKEND_BASE_URL` | API base URL the controller calls | `http://127.0.0.1:8000` |
 | `API_BASE_URL` | API base URL the frontend calls | `http://127.0.0.1:8000` |
