@@ -735,13 +735,23 @@ Invoke-WebRequest -Uri "https://room-booking-api-0khx.onrender.com/admin/mainten
 
 
 
-1. **改 README 的云链接**：把 `https://github.com/TODO`、`https://TODO.onrender.com`、`https://TODO.streamlit.app` 换成真实地址。
+1. ~~改 README 的云链接~~ **已完成**：README 顶部已是三条真实地址（2026-11-23）。
 
 2. **改 README 的 AI 使用声明**（第 8 节）：按你的真实情况写清哪部分用了 AI 辅助、你能解释哪些设计，并写明 "代码在答辩现场可被修改"。
 
-3. **重跑一遍本地测试并更新 README 记录**：`.\.venv\Scripts\Activate.ps1` 然后 `python -m pytest -q`，把实际输出替换进 README 的验证段落（当前应为 31 passed）。
+3. ~~重跑一遍本地测试并更新 README 记录~~ **已完成**：`python -m pytest` → `31 passed, 1 warning`，README 已同步。
 
 4. **提前 ≥3 天发邮件**到 `kovacs.adam.eke@gmail.com`，三个链接齐全、能打开（发之前自己点一遍）。
+
+### 发送前必做：把 Streamlit 应用设为公开
+
+用未登录的浏览器访问 `https://room-booking-tao.streamlit.app/` 会 303 跳到 `/-/login`，
+说明它现在是「仅特定人可见」。老师点开就是登录页，必须改：
+
+1. 打开 <https://share.streamlit.io>（保持你已登录的状态）
+2. 找到 `room-booking-tao` 这个 app，点右侧 `⋮` → `Settings`
+3. 左侧 `Sharing` → `Who can view this app` 下拉选 **"This app is public and searchable"**
+4. 点 `Save`，然后用浏览器无痕窗口再访问一次链接，确认直接进页面而不是登录页
 
 邮件模板（英文，正式简短）：
 
@@ -754,9 +764,9 @@ Dear Dr. Kovacs,
 
 I would like to submit the links for my Python project (room booking system):
 
-- GitHub repository: https://github.com/<user>/room-booking-system
+- GitHub repository: https://github.com/kimithebest04-Tao/room-booking-system
 - Backend (Render): https://room-booking-api-0khx.onrender.com/docs
-- Frontend (Streamlit): https://<app>.streamlit.app
+- Frontend (Streamlit): https://room-booking-tao.streamlit.app/
 
 The repository contains the README (application, usage, maintenance, verification,
 sources and extensions, design decisions), the single pytest suite, the GitHub
