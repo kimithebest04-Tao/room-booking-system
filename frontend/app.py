@@ -172,8 +172,8 @@ with list_tab:
     filter_rooms = [] if not rooms_payload else rooms_payload.get("items", [])
     col_f1, col_f2, col_f3 = st.columns([2, 1, 1])
     room_choice = col_f1.selectbox("Room", ["All rooms"] + filter_rooms)
-    date_from = col_f2.date_input("From", value=date.today())
-    date_to = col_f3.date_input("To", value=date.today() + timedelta(days=7))
+    date_from = col_f2.date_input("From", value=date.today(), key="filter_date_from")
+    date_to = col_f3.date_input("To", value=date.today() + timedelta(days=7), key="filter_date_to")
 
     if date_to < date_from:
         st.error("The end date cannot be earlier than the start date.")
@@ -209,8 +209,8 @@ with list_tab:
 with stats_tab:
     st.subheader("Utilization")
     col_s1, col_s2 = st.columns(2)
-    stats_from = col_s1.date_input("From", value=date.today())
-    stats_to = col_s2.date_input("To", value=date.today() + timedelta(days=6))
+    stats_from = col_s1.date_input("From", value=date.today(), key="stats_date_from")
+    stats_to = col_s2.date_input("To", value=date.today() + timedelta(days=6), key="stats_date_to")
 
     if stats_to < stats_from:
         st.error("The end date cannot be earlier than the start date.")
