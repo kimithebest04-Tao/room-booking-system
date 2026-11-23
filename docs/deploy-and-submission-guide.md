@@ -424,11 +424,14 @@ API_BASE_URL = "https://room-booking-api-0khx.onrender.com"
 
 * 页面左侧栏底部显示 `API: https://room-booking-api-0khx.onrender.com`（如果还显示 `127.0.0.1`，说明 Secrets 没生效：App 右上 `⋮` → `Settings` → `Secrets` 改完点 `Save`，再 `Reboot app`）。
 
-* 在 "查询" 页签能看到第 3 步造的三条预订。
+* 在 "Bookings" 页签能看到第 3 步造的三条预订。
 
-* 在 "新建" 页签新建一条，冲突时界面显示 409 的友好提示（不是 traceback）。
+* 在 "New booking" 页签新建一条，冲突时界面显示 409 的友好提示（不是 traceback）。
 
-* 在 "利用率" 页签看到 Room A 的柱状图。
+* 在 "Utilization" 页签看到 Room A 的柱状图。
+
+> 界面语言：课程为英语授课，前端已是纯英文（页签 New booking / Bookings / Utilization，
+> 按钮 "Book the room"，侧栏 "How to use" 与 "Backend healthy · v1.0.0"）。
 
 ### 4.3 完成标志
 
@@ -747,7 +750,8 @@ Invoke-WebRequest -Uri "https://room-booking-api-0khx.onrender.com/admin/mainten
 
 2026-11-23 用**无痕浏览器会话**打开 `https://room-booking-tao.streamlit.app/`，
 页面完整渲染（左侧 `API: https://room-booking-api-0khx.onrender.com`、
-`后端正常 · v1.0.0`，三个页签正常），且没有出现开发者专属的 `Manage app` 按钮，
+`Backend healthy · v1.0.0`，三个页签 New booking / Bookings / Utilization 正常），
+且没有出现开发者专属的 `Manage app` 按钮，
 说明访客身份即可直接使用。App 的 `Sharing` 为 **"This app is public and searchable"**，
 与预期一致，**不需要再改任何设置**。
 

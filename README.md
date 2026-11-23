@@ -6,7 +6,7 @@ Multi-component Python application for booking meeting rooms, built for the
 | Component | Technology | Location |
 | --- | --- | --- |
 | REST API | FastAPI + Pydantic | `backend/` |
-| Web interface | Streamlit | `frontend/app.py` |
+| Web interface | Streamlit (English UI) | `frontend/app.py` |
 | Persistence | SQLAlchemy ORM + PostgreSQL (Neon) | `backend/models.py`, `backend/db.py` |
 | Maintenance controller | asyncio + APScheduler + httpx | `maintenance/` |
 | Test suite | pytest | `tests/` |
