@@ -76,7 +76,7 @@ def intervals_overlap(
     for start, end in ((start_a, end_a), (start_b, end_b)):
         if not is_valid_interval(start, end):
             raise ValueError("interval end must be later than its start")
-    return start_a < end_b and start_b < end_a
+    return start_a <= end_b and start_b <= end_a
 
 
 def find_overlapping(
