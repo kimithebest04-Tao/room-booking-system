@@ -1,0 +1,12 @@
+{
+  "backup_id": "20261123T115046Z-2622bcd8",
+  "created_at": "2026-11-23T11:50:46+00:00",
+  "source_instance_id": "wispy-cake-58578289",
+  "app_version": "1.0.0",
+  "row_counts": {
+    "bookings": 3,
+    "system_state": 1
+  },
+  "payload_sha256": "2622bcd87933a430f379aedb0da8aab79728d8035bd533032f8e208004faade2",
+  "schema_version": 1
+}

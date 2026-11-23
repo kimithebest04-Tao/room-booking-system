@@ -54,6 +54,7 @@ def build_controller(settings: Settings) -> MaintenanceController:
     provider = NeonProvider(
         settings.neon_api_key,
         project_id=settings.neon_project_id,
+        org_id=settings.neon_org_id,
         region_id=settings.neon_region_id,
         pg_version=settings.neon_pg_version,
         timeout=settings.http_timeout_seconds,

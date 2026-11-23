@@ -47,6 +47,11 @@ def _parse_expiry(raw: Any) -> datetime | None:
     return parsed
 
 
+def _direct_host(uri: str | None) -> str | None:
+    """Neon hands out a pgbouncer host; this backend pools connections itself."""
+    return uri.replace("-pooler", "") if uri else uri
+
+
 class NeonProvider(DatabaseProvider):
     """Thin async client for the Neon API used by the maintenance controller."""
 
@@ -55,6 +60,7 @@ class NeonProvider(DatabaseProvider):
         api_key: str,
         *,
         project_id: str = "",
+        org_id: str = "",
         region_id: str = "aws-eu-central-1",
         pg_version: int = 17,
         timeout: float = 15.0,
@@ -65,6 +71,7 @@ class NeonProvider(DatabaseProvider):
             raise ProviderAuthError("NEON_API_KEY is empty; the controller cannot call the provider")
         self._api_key = api_key
         self._project_id = project_id
+        self._org_id = org_id
         self._region_id = region_id
         self._pg_version = pg_version
         self._timeout = timeout
@@ -162,11 +169,27 @@ class NeonProvider(DatabaseProvider):
             connection_uri = await self._connection_uri(project_id)
         except ProviderError as exc:
             logger.warning("Could not read the connection string of %s: %s", project_id, exc)
-        return self._instance_from(project, connection_uri)
+        return self._instance_from(project, _direct_host(connection_uri))
+
+    async def _organisation(self) -> str:
+        """Organisation id required by the project endpoints (resolved once)."""
+        if self._org_id:
+            return self._org_id
+        payload = await self._request("GET", "/users/me/organizations")
+        organizations = payload.get("organizations") or []
+        if not organizations:
+            raise ProviderError("No Neon organisation is visible to this API key")
+        self._org_id = str(organizations[0].get("id") or "")
+        if not self._org_id:
+            raise ProviderError("The Neon organisation has no id")
+        logger.info("Resolved Neon organisation %s", self._org_id)
+        return self._org_id
 
     async def list_instances(self) -> list[InstanceInfo]:
         """Return every project visible to the API key."""
-        payload = await self._request("GET", "/projects")
+        payload = await self._request(
+            "GET", "/projects", params={"org_id": await self._organisation()}
+        )
         items = payload.get("projects", [])
         instances = []
         for entry in items:
@@ -181,6 +204,7 @@ class NeonProvider(DatabaseProvider):
                 "name": name,
                 "region_id": self._region_id,
                 "pg_version": self._pg_version,
+                "org_id": await self._organisation(),
             }
         }
         payload = await self._request("POST", "/projects", json=body)
@@ -190,7 +214,7 @@ class NeonProvider(DatabaseProvider):
         if uris:
             connection_uri = uris[0].get("connection_uri")
         logger.info("Created provider instance %s (%s)", project.get("id"), name)
-        return self._instance_from(project, connection_uri)
+        return self._instance_from(project, _direct_host(connection_uri))
 
     async def delete_instance(self, identifier: str) -> None:
         """Delete one project. Callers must have explicit authorisation."""
@@ -204,4 +228,4 @@ class NeonProvider(DatabaseProvider):
             f"/projects/{project_id}/connection_uri",
             params={"database_name": "neondb", "role_name": "neondb_owner"},
         )
-        return payload.get("uri") or payload.get("connection_uri")
+        return _direct_host(payload.get("uri") or payload.get("connection_uri"))

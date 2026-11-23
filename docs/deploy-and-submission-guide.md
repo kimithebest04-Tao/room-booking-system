@@ -305,9 +305,9 @@ Neon 控制台左侧选中该项目 → `Settings` → `General`，复制 `Proje
 
 
 
-* `https://room-booking-api.onrender.com/health` → 返回 `{"status":"ok","database":"ok",...}`
+* `https://room-booking-api-0khx.onrender.com/health` → 返回 `{"status":"ok","database":"ok",...}`
 
-* `https://room-booking-api.onrender.com/docs` → 看到 Swagger 页面，三个业务端点都在
+* `https://room-booking-api-0khx.onrender.com/docs` → 看到 Swagger 页面，三个业务端点都在
 
 再用 PowerShell 造两条预订（故意留一组首尾相接的边界对）：
 
@@ -315,10 +315,10 @@ Neon 控制台左侧选中该项目 → `Settings` → `General`，复制 `Proje
 
 ```
 $body1 = '{"room":"Room A","booker":"Tao Yuhao","start_at":"2026-12-02T09:00:00","end_at":"2026-12-02T10:00:00"}'
-Invoke-WebRequest -Uri "https://room-booking-api.onrender.com/bookings" -Method Post -ContentType "application/json" -Body $body1 | Select-Object -ExpandProperty Content
+Invoke-WebRequest -Uri "https://room-booking-api-0khx.onrender.com/bookings" -Method Post -ContentType "application/json" -Body $body1 | Select-Object -ExpandProperty Content
 
 $body2 = '{"room":"Room A","booker":"Tao Yuhao","start_at":"2026-12-02T10:00:00","end_at":"2026-12-02T11:00:00"}'
-Invoke-WebRequest -Uri "https://room-booking-api.onrender.com/bookings" -Method Post -ContentType "application/json" -Body $body2 | Select-Object -ExpandProperty Content
+Invoke-WebRequest -Uri "https://room-booking-api-0khx.onrender.com/bookings" -Method Post -ContentType "application/json" -Body $body2 | Select-Object -ExpandProperty Content
 ```
 
 第二条应返回 **201**（首尾相接不算冲突）。再试一条重叠的：
@@ -327,7 +327,7 @@ Invoke-WebRequest -Uri "https://room-booking-api.onrender.com/bookings" -Method 
 
 ```
 $body3 = '{"room":"Room A","booker":"Tao Yuhao","start_at":"2026-12-02T09:30:00","end_at":"2026-12-02T10:30:00"}'
-Invoke-WebRequest -Uri "https://room-booking-api.onrender.com/bookings" -Method Post -ContentType "application/json" -Body $body3 -SkipHttpErrorCheck | Select-Object StatusCode, Content
+Invoke-WebRequest -Uri "https://room-booking-api-0khx.onrender.com/bookings" -Method Post -ContentType "application/json" -Body $body3 -SkipHttpErrorCheck | Select-Object StatusCode, Content
 ```
 
 应返回 **409**，且响应体里有 `conflicting_booking_ids`。这两条就是 "数据跨重启存活 + 规则在云端生效" 的现场证据，截图留着。
@@ -393,7 +393,7 @@ Invoke-WebRequest -Uri "https://room-booking-api.onrender.com/bookings" -Method 
 
 
 ```
-API_BASE_URL = "https://room-booking-api.onrender.com"
+API_BASE_URL = "https://room-booking-api-0khx.onrender.com"
 ```
 
 > 顶层键会自动变成环境变量，正好被 
@@ -422,7 +422,7 @@ API_BASE_URL = "https://room-booking-api.onrender.com"
 
 
 
-* 页面左侧栏底部显示 `API: https://room-booking-api.onrender.com`（如果还显示 `127.0.0.1`，说明 Secrets 没生效：App 右上 `⋮` → `Settings` → `Secrets` 改完点 `Save`，再 `Reboot app`）。
+* 页面左侧栏底部显示 `API: https://room-booking-api-0khx.onrender.com`（如果还显示 `127.0.0.1`，说明 Secrets 没生效：App 右上 `⋮` → `Settings` → `Secrets` 改完点 `Save`，再 `Reboot app`）。
 
 * 在 "查询" 页签能看到第 3 步造的三条预订。
 
@@ -582,7 +582,7 @@ RENDER_API_KEY=rnd_你的key
 RENDER_SERVICE_ID=srv-你的服务ID
 
 # 控制器要调的线上后端
-BACKEND_BASE_URL=https://room-booking-api.onrender.com
+BACKEND_BASE_URL=https://room-booking-api-0khx.onrender.com
 
 MAINTENANCE_EXPIRY_WARNING_HOURS=72
 ```
@@ -693,7 +693,7 @@ python -m maintenance.run check
 
 
 ```
-Invoke-WebRequest -Uri "https://room-booking-api.onrender.com/admin/maintenance" -Method Post `
+Invoke-WebRequest -Uri "https://room-booking-api-0khx.onrender.com/admin/maintenance" -Method Post `
   -Headers @{"X-Admin-Token"="adm_你的token"} -ContentType "application/json" -Body '{"enabled": false}'
 ```
 
@@ -755,7 +755,7 @@ Dear Dr. Kovacs,
 I would like to submit the links for my Python project (room booking system):
 
 - GitHub repository: https://github.com/<user>/room-booking-system
-- Backend (Render): https://room-booking-api.onrender.com/docs
+- Backend (Render): https://room-booking-api-0khx.onrender.com/docs
 - Frontend (Streamlit): https://<app>.streamlit.app
 
 The repository contains the README (application, usage, maintenance, verification,

@@ -1,0 +1,33 @@
+{
+  "run_id": "a90704c3ce72",
+  "reason": "documented maintenance trial",
+  "started_at": "2026-11-23T11:50:22+00:00",
+  "status": "completed",
+  "steps": [
+    "writes_blocked",
+    "source_instance_known",
+    "backup_created",
+    "instance_created",
+    "restored",
+    "restore_verified",
+    "backend_switched",
+    "content_verified",
+    "probe_write_verified",
+    "maintenance_released"
+  ],
+  "source_instance_id": "wispy-cake-58578289",
+  "new_instance_id": "quiet-tree-18455871",
+  "backup_id": "20261123T115046Z-2622bcd8",
+  "backup_directory": "backups/20261123T115046Z-2622bcd8",
+  "deploy_id": "dep-dc22j568bjmc73b53hn0",
+  "source_rule_snapshot": {
+    "booking_count": 3,
+    "overlap_pairs": [],
+    "rooms": [
+      "Room A",
+      "Room B"
+    ],
+    "first_booking_id": 1
+  },
+  "message": "replacement completed"
+}

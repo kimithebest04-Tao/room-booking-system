@@ -12,11 +12,12 @@ Multi-component Python application for booking meeting rooms, built for the
 | Test suite | pytest | `tests/` |
 | CI | GitHub Actions | `.github/workflows/ci.yml` |
 
-Cloud links (filled in at submission):
+Cloud links:
 
-- Streamlit app: `TODO — https://<app>.streamlit.app`
-- FastAPI backend: `TODO — https://<service>.onrender.com/docs`
-- GitHub repository: `TODO — https://github.com/<user>/<repo>`
+- Streamlit app: <https://room-booking-tao.streamlit.app/>
+- FastAPI backend: <https://room-booking-api-0khx.onrender.com/docs>
+- GitHub repository: <https://github.com/kimithebest04-Tao/room-booking-system>
+- CI runs: <https://github.com/kimithebest04-Tao/room-booking-system/actions>
 
 ---
 

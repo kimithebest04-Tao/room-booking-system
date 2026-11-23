@@ -67,25 +67,35 @@ def test_render_env_var_update_merges_instead_of_wiping_other_values() -> None:
 
 
 def test_neon_create_instance_returns_a_ready_connection_string() -> None:
+    calls: list[tuple[str, str, str | None]] = []
+
     def handler(request: httpx.Request) -> httpx.Response:
+        calls.append((request.method, request.url.path, request.url.params.get("org_id")))
+        if request.url.path == "/api/v2/users/me/organizations":
+            return httpx.Response(200, json={"organizations": [{"id": "org-1", "name": "demo"}]})
         assert request.method == "POST"
-        assert request.url.path == "/api/v2/projects"
         payload = json.loads(request.content)
         assert payload["project"]["region_id"] == "aws-eu-central-1"
+        assert payload["project"]["org_id"] == "org-1"
         return httpx.Response(
             200,
             json={
                 "project": {"id": "proj-1", "name": "room-booking-prod"},
-                "connection_uris": [{"connection_uri": "postgresql://user:pass@host/neondb"}],
+                "connection_uris": [
+                    {"connection_uri": "postgresql://user:pass@ep-1-pooler.example/neondb"}
+                ],
             },
         )
 
     provider = NeonProvider("neon-key", transport=httpx.MockTransport(handler))
     instance = _run(provider.create_instance("room-booking-prod"))
 
+    assert calls[0][1] == "/api/v2/users/me/organizations"
+    assert calls[1][1] == "/api/v2/projects"
     assert instance.identifier == "proj-1"
     assert instance.ready is True
-    assert instance.connection_string == "postgresql://user:pass@host/neondb"
+    # The pooled hostname is rewritten to the direct host before it is ever used.
+    assert instance.connection_string == "postgresql://user:pass@ep-1.example/neondb"
 
 
 def test_provider_connection_strings_use_the_installed_postgres_driver() -> None:

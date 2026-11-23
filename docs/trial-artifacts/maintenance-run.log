@@ -1,0 +1,32 @@
+2026-11-23 19:50:01,195 INFO     maintenance.controller: Status check: {'instance_id': 'wispy-cake-58578289', 'instance_name': 'room-booking-prod', 'ready': True, 'expires_at': None, 'expires_in_hours': None, 'backend_ok': True, 'maintenance_mode': False, 'bookings': 3, 'checked_at': '2026-11-23T11:50:01+00:00'}
+2026-11-23 19:50:46,745 INFO     maintenance.backup: Backup 20261123T115046Z-2622bcd8 written to backups/20261123T115046Z-2622bcd8 (rows={'bookings': 3, 'system_state': 1}, sha256=2622bcd87933)
+2026-11-23 19:50:46,750 INFO     maintenance.backup: Backup 20261123T115046Z-2622bcd8 loaded and verified (sha256=2622bcd87933)
+2026-11-23 19:50:47,972 ERROR    maintenance.controller: Replacement run a90704c3ce72 failed: GET /projects failed: HTTP 400 {"request_id":"31ca02a5-a7ac-4844-b5ab-180559c66e62","code":"","message":"org_id is required, you can find it on your organization settings page"}
+2026-11-23 19:50:49,137 WARNING  maintenance.controller: Maintenance mode kept active after the failure
+2026-11-23 19:52:19,855 INFO     maintenance.backup: Backup 20261123T115046Z-2622bcd8 loaded and verified (sha256=2622bcd87933)
+2026-11-23 19:52:22,150 ERROR    maintenance.controller: Replacement run a90704c3ce72 failed: POST /projects?org_id=org-lively-forest-69727962 failed: HTTP 400 {"request_id":"94671ffd-a371-4533-ad6b-fafa6c80a2d0","code":"","message":"org_id is required, you can find it on your organization settings page"}
+2026-11-23 19:52:23,000 WARNING  maintenance.controller: Maintenance mode kept active after the failure
+2026-11-23 19:52:56,592 INFO     maintenance.backup: Backup 20261123T115046Z-2622bcd8 loaded and verified (sha256=2622bcd87933)
+2026-11-23 19:52:58,478 ERROR    maintenance.controller: Replacement run a90704c3ce72 failed: POST /projects failed: HTTP 400 {"request_id":"554dbbd1-b2a1-46ef-9476-af4d299aba2f","code":"","message":"org_id is required, you can find it on your organization settings page"}
+2026-11-23 19:52:59,301 WARNING  maintenance.controller: Maintenance mode kept active after the failure
+2026-11-23 19:54:34,178 WARNING  maintenance.controller: Writes are blocked (Writes are blocked in the database, not hidden in the UI.)
+2026-11-23 19:54:34,184 INFO     maintenance.backup: Backup 20261123T115046Z-2622bcd8 loaded and verified (sha256=2622bcd87933)
+2026-11-23 19:54:34,184 WARNING  maintenance.controller: Reusing the verified backup 20261123T115046Z-2622bcd8 from the previous attempt
+2026-11-23 19:54:36,765 INFO     maintenance.neon_provider: Created provider instance quiet-tree-18455871 (room-booking-prod-a90704c3)
+2026-11-23 19:54:37,035 INFO     maintenance.backup: Backup 20261123T115046Z-2622bcd8 loaded and verified (sha256=2622bcd87933)
+2026-11-23 19:54:53,402 INFO     maintenance.backup: Restored backup 20261123T115046Z-2622bcd8 into postgresql+psycopg://neondb_owner:***@ep-curly-frost-bhpgqidx.c-10.eu-central-1.aws.neon.tech/neondb?sslmode=require (rows={'bookings': 3, 'system_state': 1})
+2026-11-23 19:54:56,111 INFO     maintenance.backup: Verification of backup 20261123T115046Z-2622bcd8: content=True counts=True rule=True
+2026-11-23 19:54:58,382 INFO     maintenance.controller: Identifier generation verified: new id 4 > restored max 3
+2026-11-23 19:54:58,390 WARNING  maintenance.controller: Restore verified: {'booking_count': 3, 'overlap_pairs': [], 'rooms': ['Room A', 'Room B'], 'first_booking_id': 1}
+2026-11-23 19:54:59,513 INFO     maintenance.render_client: Updated environment variable DATABASE_URL on Render service srv-dc1vhfqjnfac739trp50
+2026-11-23 19:55:01,052 INFO     maintenance.render_client: Triggered Render deploy dep-dc22j568bjmc73b53hn0
+2026-11-23 19:55:02,023 INFO     maintenance.render_client: Deploy dep-dc22j568bjmc73b53hn0 status=build_in_progress (0s elapsed)
+2026-11-23 19:55:18,689 INFO     maintenance.render_client: Deploy dep-dc22j568bjmc73b53hn0 status=build_in_progress (15s elapsed)
+2026-11-23 19:55:34,951 INFO     maintenance.render_client: Deploy dep-dc22j568bjmc73b53hn0 status=build_in_progress (30s elapsed)
+2026-11-23 19:55:51,010 INFO     maintenance.render_client: Deploy dep-dc22j568bjmc73b53hn0 status=update_in_progress (45s elapsed)
+2026-11-23 19:56:06,910 INFO     maintenance.render_client: Deploy dep-dc22j568bjmc73b53hn0 status=update_in_progress (60s elapsed)
+2026-11-23 19:56:22,971 INFO     maintenance.render_client: Deploy dep-dc22j568bjmc73b53hn0 status=live (75s elapsed)
+2026-11-23 19:56:22,972 WARNING  maintenance.controller: Deployment dep-dc22j568bjmc73b53hn0 finished with status live
+2026-11-23 19:56:26,606 WARNING  maintenance.controller: Post-switch verification passed for instance quiet-tree-18455871
+2026-11-23 19:56:28,617 WARNING  maintenance.controller: Maintenance mode released; application writes are open again
+2026-11-23 19:56:28,624 WARNING  maintenance.controller: Replacement run a90704c3ce72 completed

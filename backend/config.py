@@ -39,6 +39,7 @@ class Settings(BaseSettings):
     # --- maintenance controller (local process only) ---
     neon_api_key: str = ""
     neon_project_id: str = ""
+    neon_org_id: str = ""
     neon_project_name: str = "room-booking-prod"
     neon_region_id: str = "aws-eu-central-1"
     neon_pg_version: int = 17
