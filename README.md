@@ -459,9 +459,9 @@ How the output was checked: every generated file was read, executed locally
 (`uvicorn`, `streamlit`, `pytest`, `scripts/seed.py`) and the observed behaviour
 was compared with the brief. The failing cases found during review (utilization
 rounding, seed data not producing a real boundary pair) were corrected and the
-suite re-run. All code in the repository is understood and can be explained
-during the presentation; no password, API key or personal data was shared with
-any tool.
+suite re-run. All code in the repository is understood, can be explained during
+the presentation and can be modified live if the examiner asks for a change.
+No password, API key or personal data was shared with any tool.
 
 ### 5.2 Reused code and data
 
