@@ -1,0 +1,23 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# --- IDE ---
+.idea/
+.vscode/
+
+# --- local state produced by the application ---
+data/
+backups/
+logs/
+maintenance_state/
+
+# --- secrets and local configuration ---
+.env
+.env.*
+!.env.example
+secrets.toml
